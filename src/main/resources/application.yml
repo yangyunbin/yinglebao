@@ -1,0 +1,29 @@
+#服务名称必须的
+spring:
+  application:
+    name: yinglibao
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ylb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  redis:
+    port: 6379
+    host: 47.100.160.123
+    password: 123456
+
+
+#mybatis-plus
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.example.ylb.database.domain
+server:
+  port: 8200
+
+

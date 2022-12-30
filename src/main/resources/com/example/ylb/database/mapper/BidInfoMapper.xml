@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ylb.database.mapper.BidInfoMapper">
+
+
+    <select id="sumBidMoney" resultType="java.math.BigDecimal">
+        select sum(bid_money)
+        from b_bid_info
+        where bid_status = 1
+    </select>
+    <select id="investmentRanking" resultType="com.example.ylb.common.vo.InvestmentRanking">
+        select SUM(bbi.bid_money) sumBidMoney, uu.phone uphone
+        from b_bid_info bbi,
+             u_user uu
+        where bbi.uid = uu.id
+        group by bbi.uid
+        order by sumBidMoney desc
+    </select>
+    <select id="queryBidRecord" resultType="com.example.ylb.common.vo.BidRecode">
+        select phone, bbi.bid_money bidMoney, bbi.bid_time bidTime
+        from b_bid_info bbi
+                 inner join u_user uu on bbi.uid = uu.id
+        where bbi.bid_status = 1
+        order by bbi.bid_time desc
+        limit 5
+    </select>
+</mapper>
